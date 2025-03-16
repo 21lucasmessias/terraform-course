@@ -16,14 +16,24 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v2
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Install dependencies
+        run: npm install
 
       - name: Create ZIP file
         run: zip -r lambda-test.zip ./lambda -x "*.git*"
 
       - name: Upload to S3
         run: aws s3 cp lambda-test.zip s3://${{ secrets.AWS_S3_BUCKET }}/lambda-test-${{ github.sha }}.zip
+
+      - name: Update Lambda Function
+        run: |
+          aws lambda update-function-code \
+            --function-name fc-lambda-qa \
+            --s3-bucket ${{ secrets.AWS_S3_BUCKET }} \
+            --s3-key lambda-test-${{ github.sha }}.zip

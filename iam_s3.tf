@@ -15,6 +15,11 @@ resource "aws_iam_policy" "s3_put_policy" {
           "s3:PutObject"
         ]
         Resource = "arn:aws:s3:::${aws_s3_bucket.lambda-s3.bucket}/*"
+      },
+      {
+        Effect   = "Allow",
+        Action   = "lambda:UpdateFunctionCode",
+        Resource = "arn:aws:lambda:${var.aws_region}:${var.account_id}:function:${var.prefix}-${var.lambda_name}-*"
       }
     ]
   })

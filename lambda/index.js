@@ -4,7 +4,7 @@ exports.handler = async (event) => {
   const response = {
     statusCode: 200,
     body: JSON.stringify({
-      message: "Olá do Node.js 18 na Lambda!",
+      message: "Teste",
       event: event,
     }),
   };
