@@ -23,7 +23,7 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Install dependencies
-        run: npm install
+        run: cd lambda && npm install
 
       - name: Create ZIP file
         run: zip -r lambda-test.zip ./lambda -x "*.git*"
