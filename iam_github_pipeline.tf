@@ -12,7 +12,8 @@ resource "aws_iam_policy" "s3_put_policy" {
       {
         Effect = "Allow"
         Action = [
-          "s3:PutObject"
+          "s3:PutObject",
+          "s3:GetObject"
         ]
         Resource = "arn:aws:s3:::${aws_s3_bucket.lambda-s3.bucket}/*"
       },
