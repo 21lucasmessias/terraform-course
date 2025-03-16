@@ -4,7 +4,7 @@ exports.handler = async (event) => {
   const response = {
     statusCode: 200,
     body: JSON.stringify({
-      message: "Teste 3",
+      message: "Teste 4",
       event: event,
     }),
   };
