@@ -34,6 +34,6 @@ jobs:
       - name: Update Lambda Function
         run: |
           aws lambda update-function-code \
-            --function-name fc-lambda-qa \
+            --function-name fc-lambda-test-qa \
             --s3-bucket ${{ secrets.AWS_S3_BUCKET }} \
             --s3-key lambda-test-${{ github.sha }}.zip
